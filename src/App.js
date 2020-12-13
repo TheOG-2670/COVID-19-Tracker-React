@@ -1,26 +1,43 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Switch, Route} from 'react-router-dom'
+//import Covid19Tracker from './Pages/Covid19Tracker'
+import Test from './Pages/Test'
+import NavBar from './NavBar'
+import TrackerCard from './CovidTrackerComponent/TrackerCard.js';
+import GraphCard from './CovidTrackerComponent/GraphCard.js'
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <NavBar highlight='Tracker'/>
+
+      <Switch>
+        <Route exact path='/' component={Test}/>
+        <div className='row' style={{margin:'0'}}>
+
+          <Route path="/covidTracker">  
+            <div className='col-md-4'>
+              <TrackerCard regionName=''/>  
+            </div>
+            
+            <div className='col-md-4'>
+              <TrackerCard regionName='Canada'/>
+            </div>
+            
+            <div className='col-md-4'>
+              <TrackerCard regionName='US'/>
+            </div>
+
+            
+            <div className='col-md-4'>
+              <GraphCard regions='Global,Canada'/>
+            </div>
+          </Route>
+
+        </div>
+      
+      </Switch>
     </div>
+  
   );
 }
-
-export default App;
