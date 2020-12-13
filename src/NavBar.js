@@ -43,10 +43,6 @@ export default class NavBar extends Component
                 <a className="navbar-brand" href="#">Navbar</a>
                 <ul className="navbar-nav">
                     <li className="nav-item">
-                        <NavLink exact to="/" activeClassName="active" className="nav-link">Home</NavLink>
-                    </li>
-                    
-                    <li className="nav-item">
                         <NavLink exact to="/covidTracker"  activeClassName="active" className="nav-link">Covid-19 Tracker</NavLink>
                     </li>  
 
