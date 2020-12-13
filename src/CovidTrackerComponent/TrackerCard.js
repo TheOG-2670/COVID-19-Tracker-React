@@ -67,7 +67,8 @@ export default class TrackerCard extends Component
                             <h3 className='card-header'>
                                 Covid-19 Tracker - <span>
                                                         <i>{this.state.region === '' ? 'Global' : this.state.region}</i>
-                                                        <img src={this.setRegionFlag()} height="30" width="30"
+                                                        <img src={this.setRegionFlag()} height="30" 
+                                                        width={this.state.region===''?"30":"50"}
                                                         style={{marginLeft:'10px'}}/> 
                                                     </span>
                             </h3>
