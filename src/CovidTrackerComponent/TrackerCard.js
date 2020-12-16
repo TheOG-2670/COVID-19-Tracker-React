@@ -14,7 +14,7 @@ export default class TrackerCard extends Component {
     }
 
     componentDidMount() {
-        var regionURL = this.props.regionName === '' ?
+        var regionURL = this.props.regionName === 'Global' ?
             "https://covid19.mathdro.id/api/" :
             "https://covid19.mathdro.id/api/countries/" + this.props.regionName;
 
@@ -47,7 +47,7 @@ export default class TrackerCard extends Component {
                     <div id='confirmedCases' >
                         <h5 className='card-title' style={covidCaseColorScheme.confirmedTitle}>
                             Confirmed Cases:
-                                            </h5>
+                        </h5>
                         <p className='card-text' style={covidCaseColorScheme.confirmedNo}>
                             {this.state.confirmed}
                         </p>
@@ -58,7 +58,7 @@ export default class TrackerCard extends Component {
                     <div id='totalDeaths' >
                         <h5 className='card-title' style={covidCaseColorScheme.deathsTitle}>
                             Total Deaths:
-                                            </h5>
+                        </h5>
                         <p className='card-text' style={covidCaseColorScheme.deathsNo}>
                             {this.state.deaths}
                         </p>
@@ -69,7 +69,7 @@ export default class TrackerCard extends Component {
                     <div id='totalRecovered' style={covidCaseColorScheme.recoveredTitle}>
                         <h5 className='card-title'>
                             Total Recoveries:
-                                            </h5>
+                        </h5>
                         <p className='card-text' style={covidCaseColorScheme.recoveredNo}>
                             {this.state.recovered}
                         </p>
