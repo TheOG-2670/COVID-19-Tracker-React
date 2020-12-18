@@ -14,13 +14,29 @@ export default class CardContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            region: this.props.regionName,
-            innerCard: this.props.children[0]
+            currentCard:null
         }
+
         this.setRegionFlag = this.setRegionFlag.bind(this)
         this.toGraph = this.toGraph.bind(this)
         this.toTracker = this.toTracker.bind(this)
         this.showButtons = this.showButtons.bind(this)
+        this.cardType=this.cardType.bind(this)
+    }
+
+    cardType(type)
+    {
+        if(type==='t')
+            return <TrackerCard regionName={this.props.regionName}/>
+        else if (type==='g')
+            return <GraphCard id={this.props.id} regionName={this.props.regionName}/>
+    }
+
+    componentDidMount()
+    {
+        this.setState({
+            currentCard: this.cardType('t')
+        })
     }
 
     setRegionFlag = () => {
@@ -36,28 +52,35 @@ export default class CardContainer extends Component {
 
     toGraph()
     {
-        this.setState({
-            innerCard: this.props.children[1]
-        })
+        if(!(this.state.innerCard instanceof GraphCard))
+        {
+            this.setState({
+                currentCard:this.cardType('g')
+            })
+        }
     }
 
     toTracker()
     {
-        this.setState({
-            innerCard: this.props.children[0]
-        })
+        if(!(this.state.innerCard instanceof TrackerCard))
+        {
+            this.setState({
+                currentCard:this.cardType('t')
+            })
+        }
     }
 
 
     showButtons()
     {
-        if(this.state.region!=='Global')
+        if(this.props.regionName!=='Global')
         {
             return(
                 <div>
                     <div id="tracker-graph">
-                        {this.state.innerCard}
+                        {this.state.currentCard}
                     </div>
+
                         <li className="list-group-item">
                                 <p className='card-text' >
                                     <input id='tracker' type="button" value="Tracker" onClick={this.toTracker}/>
@@ -70,7 +93,7 @@ export default class CardContainer extends Component {
         else
         {
             return(
-                this.state.innerCard
+                this.state.currentCard
             )
         }
     }
@@ -80,9 +103,9 @@ export default class CardContainer extends Component {
             <div style={{ marginTop: '30px' }}>
                 <div className='card'>
                     <h3 className='card-header'>
-                        <i>{this.state.region}</i>
+                        <i>{this.props.regionName}</i>
                             <img src={this.setRegionFlag()} height="30"
-                                width={this.state.region === 'Global' ? "30" : "50"}
+                                width={this.props.regionName === 'Global' ? "30" : "50"}
                                 style={{ marginLeft: '10px' }} />
                     </h3>
                     <ul className="list-group list-group-flush">

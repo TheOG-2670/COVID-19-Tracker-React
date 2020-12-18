@@ -30,13 +30,12 @@ export default class GraphCard extends Component {
 
     loadChart() {
         setTimeout(() => {
-            this.chartDemo(this.state.deaths)
+            this.chartDemo()
         }, 500)
-
     }
 
-    chartDemo(data) {
-        var ctx = document.getElementById('myChart').getContext("2d");
+    chartDemo() {
+        var ctx = document.getElementById(this.props.id).getContext("2d");
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
@@ -71,7 +70,7 @@ export default class GraphCard extends Component {
     render() {
         return (
             <div className="card-body">
-                <canvas id="myChart" width="400" height="400"></canvas>
+                <canvas id={this.props.id} width="400" height="400"></canvas>
                 {this.loadChart()}
             </div>
         )

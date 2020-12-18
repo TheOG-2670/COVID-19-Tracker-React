@@ -1,12 +1,20 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom'
 import NavBar from './NavBar'
-import TrackerCard from './CovidTrackerComponent/TrackerCard.js';
 import CardContainer from './CovidTrackerComponent/CardContainer';
-import GraphCard from './CovidTrackerComponent/GraphCard';
 
 export default function App() {
 
+  var cards=[]
+  var regions=["Global", "Canada", "US"]
+  for(var i=0; i < regions.length; i++)
+  {
+    cards.push(
+      <div className="col-md-4">
+        <CardContainer id={i} regionName={regions[i]}/>
+      </div>
+    )
+  }
   
   return (
     <div>
@@ -16,19 +24,7 @@ export default function App() {
         <div className='row' style={{margin:'0'}}>
 
           <Route path="/covidTracker"> 
-          <div className="col-md-4">
-              <CardContainer regionName="Canada">
-                <TrackerCard regionName="Canada"/>
-                <GraphCard regionName="Canada"/>
-              </CardContainer>
-            </div>
-
-            <div className="col-md-4">
-              <CardContainer regionName="US">
-                <TrackerCard regionName="US"/>
-                <GraphCard regionName="US"/>
-              </CardContainer>
-            </div>
+            {cards}
           </Route>
 
         </div>
