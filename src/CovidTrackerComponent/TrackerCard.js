@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
+import $ from 'jquery';
 
-const initialState = {
-    region: null,
-    confirmed: null,
-    deaths: null,
-    recovered: null
-}
 
 export default class TrackerCard extends Component {
     constructor(props) {
         super(props)
-        this.state = initialState;
+        this.state = {
+            confirmed: null,
+            deaths: null,
+            recovered: null
+        }
     }
 
     componentDidMount() {
@@ -21,9 +20,7 @@ export default class TrackerCard extends Component {
         fetch(regionURL)
             .then(response => { return response.json() })
             .then(data => {
-                //console.log(data.data.confirmed)
                 this.setState({
-                    region: this.props.regionName,
                     confirmed: data.confirmed.value,
                     deaths: data.deaths.value,
                     recovered: data.recovered.value
@@ -32,7 +29,6 @@ export default class TrackerCard extends Component {
     }
 
     render() {
-        console.log(this.state.region)
         const covidCaseColorScheme = {}
         covidCaseColorScheme.confirmedTitle = { color: '#b3a700' }
         covidCaseColorScheme.confirmedNo = { color: '#FFD700' }

@@ -35,16 +35,28 @@ export default class NavBar extends Component
         const timePosition={
             color:"white",
             position:"absolute",
-            right:"0"
+            right:"0",
+            fontSize:"0.2in"
         }
 
         return(
-            <nav className="navbar navbar-expand navbar-dark bg-dark">
-                <a className="navbar-brand" href="#">Navbar</a>
+            <nav className="navbar navbar-expand navbar-dark bg-dark d-flex justify-content-center">
                 <ul className="navbar-nav">
+                    <li className="nav-item" style={{marginRight:"2in"}}>
+                        <NavLink exact to="/covidTracker"  activeClassName="active" className="nav-link">
+                            <h3>
+                                Covid-19 Tracker
+                            </h3>
+                            </NavLink>
+                    </li> 
+
                     <li className="nav-item">
-                        <NavLink exact to="/covidTracker"  activeClassName="active" className="nav-link">Covid-19 Tracker</NavLink>
-                    </li>  
+                        <NavLink exact to="/self-assessment"  activeClassName="active" className="nav-link">
+                            <h3>
+                                Self-Assessment
+                            </h3>
+                        </NavLink>
+                    </li> 
 
                     <li className="nav-item nav-link" style={timePosition}>
                         {this.getCurrentTime()}

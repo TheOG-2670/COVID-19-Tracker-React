@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import $ from 'jquery'
-import CanadaFlag from '../images/canada_flag.jpg'
 import GlobeFlag from '../images/blue_globe_icon.png'
-import USFlag from '../images/american-flag-icon.jpg'
 import TrackerCard from './TrackerCard';
 import GraphCard from './GraphCard';
-import TrackerStyle from '../CardContainer.css'
+import ContainerStyle from '../CardContainer.css'
 
 $(function () {
     console.log("jquery ready!")
@@ -45,9 +43,13 @@ export default class CardContainer extends Component {
             case 'Global':
                 return GlobeFlag
             case 'Canada':
-                return CanadaFlag
+                return 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Flag_of_Canada_%28Pantone%29.svg/255px-Flag_of_Canada_%28Pantone%29.svg.png'
             case 'US':
-                return USFlag;
+                return 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/220px-Flag_of_the_United_States.svg.png';
+            case 'Sri Lanka':
+                return "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Flag_of_Sri_Lanka.svg/255px-Flag_of_Sri_Lanka.svg.png";
+            case 'Israel':
+                return "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Flag_of_Israel.svg/234px-Flag_of_Israel.svg.png"
         }
     };
 

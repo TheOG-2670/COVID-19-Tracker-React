@@ -62,6 +62,9 @@ export default class GraphCard extends Component {
                             beginAtZero: true
                         }
                     }]
+                },
+                legend:{
+                    display:false
                 }
             }
         });

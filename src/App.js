@@ -1,12 +1,12 @@
 import React from 'react';
-import {Switch, Route} from 'react-router-dom'
+import {Switch, Route, Redirect} from 'react-router-dom'
 import NavBar from './NavBar'
 import CardContainer from './CovidTrackerComponent/CardContainer';
 
 export default function App() {
 
   var cards=[]
-  var regions=["Canada", "US", "Sri Lanka", "Israel", ]
+  var regions=["Canada", "US", "Sri Lanka", "Israel"]
   for(var i=0; i < regions.length; i++)
   {
     cards.push(
@@ -18,9 +18,13 @@ export default function App() {
   
   return (
     <div>
-      <NavBar highlight='Tracker'/>
+      <NavBar/>
   
-      <Switch>      
+      <Switch>
+          <Route exact path="/">
+            <Redirect to="/covidTracker"/>
+          </Route>
+
           <Route path="/covidTracker"> 
             
             <div className="col-md-6 offset-md-3">
