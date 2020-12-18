@@ -5,6 +5,7 @@ import GlobeFlag from '../images/blue_globe_icon.png'
 import USFlag from '../images/american-flag-icon.jpg'
 import TrackerCard from './TrackerCard';
 import GraphCard from './GraphCard';
+import TrackerStyle from '../CardContainer.css'
 
 $(function () {
     console.log("jquery ready!")
@@ -80,13 +81,16 @@ export default class CardContainer extends Component {
                     <div id="tracker-graph">
                         {this.state.currentCard}
                     </div>
+                        
 
-                        <li className="list-group-item">
-                                <p className='card-text' >
-                                    <input id='tracker' type="button" value="Tracker" onClick={this.toTracker}/>
-                                    <input id='graph' type="button" value="Graph" onClick={this.toGraph}/>
-                                </p>
-                        </li>
+                        <ul className="list-group list-group-horizontal">
+                                <li className="cardButton col list-group-item d-flex justify-content-center" onClick={this.toTracker}>
+                                    Tracker
+                                </li>
+                                <li className="cardButton col list-group-item d-flex justify-content-center" onClick={this.toGraph}>
+                                    Graph
+                                </li>
+                        </ul>
                 </div>
             )
         }
@@ -108,9 +112,7 @@ export default class CardContainer extends Component {
                                 width={this.props.regionName === 'Global' ? "30" : "50"}
                                 style={{ marginLeft: '10px' }} />
                     </h3>
-                    <ul className="list-group list-group-flush">
                         {this.showButtons()}
-                    </ul>
                 </div>
             </div>
         );

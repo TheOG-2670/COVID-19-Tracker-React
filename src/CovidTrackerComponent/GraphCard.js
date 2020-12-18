@@ -70,7 +70,7 @@ export default class GraphCard extends Component {
     render() {
         return (
             <div className="card-body">
-                <canvas id={this.props.id}></canvas>
+                <canvas id={this.props.id} height="220"></canvas>
                 {this.loadChart()}
             </div>
         )

@@ -6,7 +6,7 @@ import CardContainer from './CovidTrackerComponent/CardContainer';
 export default function App() {
 
   var cards=[]
-  var regions=["Canada", "US", "Sri Lanka", "Israel", "United Arab Emirates"]
+  var regions=["Canada", "US", "Sri Lanka", "Israel", ]
   for(var i=0; i < regions.length; i++)
   {
     cards.push(
@@ -19,22 +19,20 @@ export default function App() {
   return (
     <div>
       <NavBar highlight='Tracker'/>
-        
-        <div className="col" style={{paddingLeft:"4.5in", paddingRight:"4.5in"}}>
-          <CardContainer regionName="Global"/>
-        </div>
-
-      <Switch>
-        
-        <div className='row' style={{margin:'0'}}>
-          
+  
+      <Switch>      
           <Route path="/covidTracker"> 
-            {cards}
-          </Route>
+            
+            <div className="col-md-6 offset-md-3">
+              <CardContainer regionName="Global"/>
+            </div>
+            
+            <div className='row' style={{margin:'0'}}>
+              {cards}
+            </div>
 
-        </div>
+          </Route>
       </Switch>
-      
     </div>
   
   );

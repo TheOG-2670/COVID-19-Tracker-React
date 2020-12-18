@@ -1,0 +1,9 @@
+.cardButton:active
+{
+    background-color: lightgrey;
+}
+
+.cardButton:hover
+{
+    cursor: pointer;
+}
