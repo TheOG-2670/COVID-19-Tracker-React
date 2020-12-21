@@ -86,10 +86,10 @@ export default class CardContainer extends Component {
                         
 
                         <ul className="list-group list-group-horizontal">
-                                <li className="cardButton col list-group-item d-flex justify-content-center" onClick={this.toTracker}>
+                                <li className="trackerCard col d-flex justify-content-center btn btn-light" onClick={this.toTracker}>
                                     Tracker
                                 </li>
-                                <li className="cardButton col list-group-item d-flex justify-content-center" onClick={this.toGraph}>
+                                <li className="graphCard col d-flex justify-content-center btn btn-light" onClick={this.toGraph}>
                                     Graph
                                 </li>
                         </ul>
