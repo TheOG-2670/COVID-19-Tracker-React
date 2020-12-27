@@ -1,26 +1,17 @@
 {
-  "name": "client",
-  "version": "0.1.0",
-  "private": true,
+  "name": "covid-tracker",
+  "version": "1.0.0",
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
     "chart.js": "^2.9.4",
+    "git": "^0.1.5",
     "jquery": "^3.5.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.14.0",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "^3.4.4"
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^4.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "start": "react-scripts start"
   },
   "browserslist": {
     "production": [
@@ -34,5 +25,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8082"
+  "proxy":"http://server:8080/"
 }
