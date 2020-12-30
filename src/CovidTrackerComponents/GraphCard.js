@@ -5,7 +5,6 @@ export default class GraphCard extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            region: this.props.regionName,
             confirmed: null,
             deaths: null,
             recovered: null
@@ -16,22 +15,22 @@ export default class GraphCard extends Component {
     }
 
     componentDidMount() {
-        var regionURL = "https://covid19.mathdro.id/api/countries/" + this.state.region;
-        fetch(regionURL)
-            .then(response => { return response.json() })
-            .then(data => {
-                this.setState({
-                    confirmed:data.confirmed.value,
-                    deaths: data.deaths.value,
-                    recovered: data.recovered.value
-                })
+        if(this.props.regionData!==undefined)
+        {
+            console.log(this.props.regionData)
+            this.setState({
+                confirmed: this.props.regionData.confirmed,
+                deaths: this.props.regionData.deaths,
+                recovered: this.props.regionData.recovered
             })
+        }
+        this.loadChart()
     }
 
     loadChart() {
         setTimeout(() => {
             this.chartDemo()
-        }, 500)
+        },0)
     }
 
     chartDemo() {
@@ -74,7 +73,6 @@ export default class GraphCard extends Component {
         return (
             <div className="card-body">
                 <canvas id={this.props.id} height="220"></canvas>
-                {this.loadChart()}
             </div>
         )
     }

@@ -13,19 +13,26 @@ export default class TrackerCard extends Component {
     }
 
     componentDidMount() {
-        var regionURL = this.props.regionName === 'Global' ?
-            "https://covid19.mathdro.id/api/" :
-            "https://covid19.mathdro.id/api/countries/" + this.props.regionName;
-
-        fetch(regionURL)
-            .then(response => { return response.json() })
-            .then(data => {
-                this.setState({
-                    confirmed: data.confirmed.value,
-                    deaths: data.deaths.value,
-                    recovered: data.recovered.value
-                })
+        console.log(this.props.regionData)
+        if(this.props.regionData!==undefined)
+        {
+            console.log(this.props.regionData.confirmed)
+            this.setState({
+                confirmed: this.props.regionData.confirmed,
+                deaths: this.props.regionData.deaths,
+                recovered: this.props.regionData.recovered
             })
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState)
+    {
+        if(prevProps.regionData!==this.props.regionData)
+        {   
+            this.setState({
+                confirmed:this.props.regionData.confirmed
+            })
+        }
     }
 
     render() {

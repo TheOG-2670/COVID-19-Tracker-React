@@ -25,10 +25,11 @@ export default class CardContainer extends Component {
 
     cardType(type)
     {
+        console.log(JSON.stringify(this.props.regionData))
         if(type==='t')
-            return <TrackerCard regionName={this.props.regionName}/>
+            return <TrackerCard regionName={this.props.regionName} regionData={this.props.regionData}/>
         else if (type==='g')
-            return <GraphCard id={this.props.id} regionName={this.props.regionName}/>
+            return <GraphCard id={this.props.id} regionName={this.props.regionName} regionData={this.props.regionData}/>
     }
 
     componentDidMount()
@@ -37,6 +38,17 @@ export default class CardContainer extends Component {
             currentCard: this.cardType('t')
         })
     }
+
+    componentDidUpdate(prevProps, prevState)
+    {
+        if(prevProps.regionData!==this.props.regionData)
+        {
+            this.setState({
+                currentCard: this.cardType('t')
+            })
+        }
+    }
+    
 
     setRegionFlag = () => {
         switch (this.props.regionName) {

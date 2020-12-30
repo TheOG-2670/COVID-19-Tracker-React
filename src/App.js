@@ -1,25 +1,50 @@
-import React from 'react';
+import React, { Component} from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom'
 import NavBar from './NavBar'
 import CardContainer from './CovidTrackerComponents/CardContainer';
 
-export default function App() {
+export default class App extends Component {
 
-  fetch('/api/covid-tracker')
-  .then(response =>{return response.text()})
-  .then(res=>console.log(res))
+  constructor(props)
+  {
+    super(props)
+    this.state={
+      data:[]
+    }
+  }
 
-  // var cards=[]
-  // var regions=["Canada", "US", "Sri Lanka", "Israel"]
-  // for(var i=0; i < regions.length; i++)
-  // {
-  //   cards.push(
-  //     <div className="col-md-3">
-  //       <CardContainer id={i} regionName={regions[i]}/>
-  //     </div>
-  //   )
-  // }
+  componentDidMount()
+  {
+    setInterval(()=>{
+      fetch('/api/getAll')
+      .then(res=>{return res.json()})
+      .then(countryData=>{
+
+        var a=[]
+        for(var i=0; i < countryData.length; i++)
+        {
+            a.push(
+              <CardContainer key={i} id={i} regionName={countryData[i].name} regionData={countryData[i]}/>
+            )
+        }
+        this.setState({
+          data:a
+        })
+      })
+
+    },1000)
+}
+
+  /*
+  In package.json, the 'proxy' line configures a proxy connection between the react development server and
+  the node api server to route all requests to their appropriate destinations.
   
+  Note: the use of '/' at the end of the server's proxy address enables the react development server to
+  automatically route requests and responses to the node api without having to type in the full api route 
+  in the URL. 
+  */
+  
+render(){
   return (
     <div>
       <NavBar/>
@@ -31,17 +56,25 @@ export default function App() {
 
           <Route path="/covidTracker"> 
             
-            {/* <div className="col-md-6 offset-md-3">
+            <div className="col-md-6 offset-md-3">
               <CardContainer regionName="Global"/>
             </div>
             
             <div className='row' style={{margin:'0'}}>
-              {cards}
-            </div> */}
+
+              {this.state.data.map(item=>
+                <div className="col-md-3">
+                  {item}
+                </div>
+              )}
+            
+            </div>
 
           </Route>
+
       </Switch>
     </div>
   
   );
+}
 }
