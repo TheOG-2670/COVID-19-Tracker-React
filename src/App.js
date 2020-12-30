@@ -11,28 +11,36 @@ export default class App extends Component {
     this.state={
       data:[]
     }
+
+    this.fetchCovidData=this.fetchCovidData.bind(this)
+  }
+
+  fetchCovidData()
+  {
+    fetch('/api/getAll')
+    .then(res=>{return res.json()})
+    .then(countryData=>{
+
+      var cards=[]
+      for(var i=0; i < countryData.length; i++)
+      {
+          cards.push(
+            <CardContainer key={i} id={i} regionName={countryData[i].name} regionData={countryData[i]}/>
+          )
+      }
+      this.setState({
+        data:cards
+      })
+    })
   }
 
   componentDidMount()
   {
-    setInterval(()=>{
-      fetch('/api/getAll')
-      .then(res=>{return res.json()})
-      .then(countryData=>{
-
-        var a=[]
-        for(var i=0; i < countryData.length; i++)
-        {
-            a.push(
-              <CardContainer key={i} id={i} regionName={countryData[i].name} regionData={countryData[i]}/>
-            )
-        }
-        this.setState({
-          data:a
-        })
-      })
-
-    },1000)
+    this.fetchCovidData()
+    setInterval(()=>{   
+      console.log("updating data!")
+      this.fetchCovidData()
+    },3600000)
 }
 
   /*
