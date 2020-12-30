@@ -20,12 +20,11 @@ export default class App extends Component {
     fetch('/api/getAll')
     .then(res=>{return res.json()})
     .then(countryData=>{
-
       var cards=[]
       for(var i=0; i < countryData.length; i++)
       {
           cards.push(
-            <CardContainer key={i} id={i} regionName={countryData[i].name} regionData={countryData[i]}/>
+            <CardContainer id={i} regionData={countryData[i]}/>
           )
       }
       this.setState({
@@ -65,13 +64,14 @@ render(){
           <Route path="/covidTracker"> 
             
             <div className="col-md-6 offset-md-3">
-              <CardContainer regionName="Global"/>
+              {this.state.data[0]}
             </div>
             
             <div className='row' style={{margin:'0'}}>
 
-              {this.state.data.map(item=>
-                <div className="col-md-3">
+              {this.state.data.filter(item=>item.props.regionData.name!=="Global")
+                .map(item=>
+                <div key={item.key} className="col-md-3">
                   {item}
                 </div>
               )}
