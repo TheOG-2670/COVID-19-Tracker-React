@@ -1,10 +1,8 @@
 # Covid-19 Tracker
 
-This React web app extracts statistical data via an API endpoint from different countries and displays the number of active cases, recoveries and deaths that those countries report. Currently, Global, Canadian, American, Sri Lankan, and Israeli cases, deaths and recoveries are displayed with the intention to display other countries with more upcoming updates.
+This React web app displays statistical data via a custom-built NodeJS API back-end which accesses an external API that aggregates data from John Hopkins University for different countries and displays the number of active cases, recoveries and deaths from those countries. The app has been updated to display global and country-specific data.
 
-**Note**: This is a work-in-progress
+**Note**: This is still a work-in-progress with more features to be added in the near future
 
 
-Credits go to **Mathdroid** for developing the API endpoint.
-
-GitHub COVID-19 API Repository Link: https://github.com/mathdroid/covid-19-api
+Credits go to **Mathdroid** for developing the API endpoint: https://github.com/mathdroid/covid-19-api
