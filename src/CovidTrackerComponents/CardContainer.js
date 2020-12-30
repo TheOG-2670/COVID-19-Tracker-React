@@ -25,11 +25,11 @@ export default class CardContainer extends Component {
 
     cardType(type)
     {
-        console.log(JSON.stringify(this.props.regionData))
+        
         if(type==='t')
-            return <TrackerCard regionName={this.props.regionName} regionData={this.props.regionData}/>
+            return <TrackerCard regionData={this.props.regionData}/>
         else if (type==='g')
-            return <GraphCard id={this.props.id} regionName={this.props.regionName} regionData={this.props.regionData}/>
+            return <GraphCard id={this.props.id} regionData={this.props.regionData}/>
     }
 
     componentDidMount()
@@ -51,7 +51,7 @@ export default class CardContainer extends Component {
     
 
     setRegionFlag = () => {
-        switch (this.props.regionName) {
+        switch (this.props.regionData.name) {
             case 'Global':
                 return GlobeFlag
             case 'Canada':
@@ -88,7 +88,7 @@ export default class CardContainer extends Component {
 
     showButtons()
     {
-        if(this.props.regionName!=='Global')
+        if(this.props.regionData.name!=='Global')
         {
             return(
                 <div>
@@ -121,9 +121,9 @@ export default class CardContainer extends Component {
             <div style={{ marginTop: '30px' }}>
                 <div className='card'>
                     <h3 className='card-header'>
-                        <i>{this.props.regionName}</i>
+                        <i>{this.props.regionData.name}</i>
                             <img src={this.setRegionFlag()} height="30"
-                                width={this.props.regionName === 'Global' ? "30" : "50"}
+                                width={this.props.regionData.name === 'Global' ? "30" : "50"}
                                 style={{ marginLeft: '10px' }} />
                     </h3>
                         {this.showButtons()}
