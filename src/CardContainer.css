@@ -1,6 +1,15 @@
-.cardButton:active
+.trackerCard
 {
-    background-color: lightgrey;
+    border-top: 0.5px solid lightgray;
+    border-right: 0.5px solid lightgray;
+    border-radius: 0px;
+}
+
+.graphCard
+{
+    border-top: 0.5px solid lightgray;
+    border-left: 0.5px solid lightgray;
+    border-radius: 0px;
 }
 
 .cardButton:hover

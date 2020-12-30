@@ -1,38 +1,41 @@
 import React, { Component } from 'react';
+import $ from 'jquery';
 
-const initialState = {
-    region: null,
-    confirmed: null,
-    deaths: null,
-    recovered: null
-}
 
 export default class TrackerCard extends Component {
     constructor(props) {
         super(props)
-        this.state = initialState;
+        this.state = {
+            confirmed: null,
+            deaths: null,
+            recovered: null
+        }
     }
 
     componentDidMount() {
-        var regionURL = this.props.regionName === 'Global' ?
-            "https://covid19.mathdro.id/api/" :
-            "https://covid19.mathdro.id/api/countries/" + this.props.regionName;
-
-        fetch(regionURL)
-            .then(response => { return response.json() })
-            .then(data => {
-                //console.log(data.data.confirmed)
-                this.setState({
-                    region: this.props.regionName,
-                    confirmed: data.confirmed.value,
-                    deaths: data.deaths.value,
-                    recovered: data.recovered.value
-                })
+        console.log(this.props.regionData)
+        if(this.props.regionData!==undefined)
+        {
+            console.log(this.props.regionData.confirmed)
+            this.setState({
+                confirmed: this.props.regionData.confirmed,
+                deaths: this.props.regionData.deaths,
+                recovered: this.props.regionData.recovered
             })
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState)
+    {
+        if(prevProps.regionData!==this.props.regionData)
+        {   
+            this.setState({
+                confirmed:this.props.regionData.confirmed
+            })
+        }
     }
 
     render() {
-        console.log(this.state.region)
         const covidCaseColorScheme = {}
         covidCaseColorScheme.confirmedTitle = { color: '#b3a700' }
         covidCaseColorScheme.confirmedNo = { color: '#FFD700' }
