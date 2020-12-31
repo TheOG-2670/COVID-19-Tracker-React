@@ -8,7 +8,7 @@ export default class TrackerPage extends Component
     {
       super(props)
         this.state={
-          data:this.props.cacheData
+          data:[]
         }
       this.getCachedData=this.getCachedData.bind(this)
       this.updateData=this.updateData.bind(this)
@@ -36,41 +36,23 @@ export default class TrackerPage extends Component
 
   async updateData()
   {
-    const response = await fetch('/api/covid/updateData', {
+    await fetch('/api/covid/updateData', {
         method:'POST',
         body:null
     })
-    const res = await response.text()
-    console.log(res)
   }
 
   componentDidMount()
   {
-    setTimeout(()=>{
-      this.setState({
-        data:this.props.cacheData
-      })
-    },100)
-
     console.log("page loaded!")
+    this.getCachedData()
+    
     setInterval(()=>{
         this.updateData()
         this.getCachedData()
         console.log("page updated!")
-    },5000) //fetch data from api every hour starting at app launch
+    },3600000) //fetch data from api every hour starting at app launch
 
-  }
-
-  shouldComponentUpdate(nextProps, nextState)
-  {
-    if(this.state.data===nextState.data)
-    {
-      return false
-    }
-    else
-    {
-      return true
-    }
   }
 
     render()
