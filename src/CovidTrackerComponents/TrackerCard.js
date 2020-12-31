@@ -30,7 +30,9 @@ export default class TrackerCard extends Component {
         if(prevProps.regionData!==this.props.regionData)
         {   
             this.setState({
-                confirmed:this.props.regionData.confirmed
+                confirmed:this.props.regionData.confirmed,
+                deaths:this.props.regionData.deaths,
+                recovered:this.props.regionData.recovered
             })
         }
     }
