@@ -8,7 +8,8 @@ export default class TrackerPage extends Component
     {
       super(props)
         this.state={
-          data:[]
+          data:[],
+          updateInterval:null
         }
       this.getCachedData=this.getCachedData.bind(this)
       this.updateData=this.updateData.bind(this)
@@ -47,12 +48,20 @@ export default class TrackerPage extends Component
     console.log("page loaded!")
     this.getCachedData()
     
-    setInterval(()=>{
+    var intervalID = setInterval(()=>{
         this.updateData()
         this.getCachedData()
         console.log("page updated!")
-    },3600000) //fetch data from api every hour starting at app launch
+    },10000) //fetch data from api every hour starting at app launch
 
+    this.setState({
+      updateInterval: intervalID
+    })
+  }
+
+  componentWillUnmount()
+  {
+    clearInterval(this.state.updateInterval)
   }
 
     render()
