@@ -6,7 +6,7 @@ export default function NavBar() {
     //replaces constructor
     const [clock, setClock] = useState(new Date()) //clock -> state variable | setClock -> replaces setState
 
-    //replaces componentDidMount and componentWillUnmount
+    //replaces componentDidMount, componentDidUpdate, and componentWillUnmount
     useEffect(() => {
         var clockTimerID = setInterval(()=>{
             setClock(new Date())
