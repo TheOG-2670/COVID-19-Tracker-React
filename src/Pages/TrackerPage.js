@@ -16,7 +16,7 @@ export default class TrackerPage extends Component
 
   getCachedData()
   {
-    fetch('/api/covid/getCachedData')
+    fetch('/api/covid/cachedData')
     .then(res=>{return res.json()})
     .then(data=>{
       var cards=[]
