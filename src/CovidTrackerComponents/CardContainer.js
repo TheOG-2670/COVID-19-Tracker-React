@@ -56,7 +56,7 @@ export default class CardContainer extends Component {
                 return GlobeFlag
             case 'Canada':
                 return 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Flag_of_Canada_%28Pantone%29.svg/255px-Flag_of_Canada_%28Pantone%29.svg.png'
-            case 'US':
+            case 'USA':
                 return 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/220px-Flag_of_the_United_States.svg.png';
             case 'Sri Lanka':
                 return "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Flag_of_Sri_Lanka.svg/255px-Flag_of_Sri_Lanka.svg.png";
@@ -121,10 +121,10 @@ export default class CardContainer extends Component {
             <div style={{ marginTop: '30px' }}>
                 <div className='card'>
                     <h3 className='card-header'>
-                        <i>{this.props.regionData.name}</i>
-                            <img src={this.setRegionFlag()} height="30"
+                        <img src={this.setRegionFlag()} height="30"
                                 width={this.props.regionData.name === 'Global' ? "30" : "50"}
-                                style={{ marginLeft: '10px' }} />
+                                style={{ marginRight: '10px' }} />
+                        <i>{this.props.regionData.name}</i>
                     </h3>
                         {this.showButtons()}
                 </div>
