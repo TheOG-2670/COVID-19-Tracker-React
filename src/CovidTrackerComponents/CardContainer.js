@@ -3,7 +3,7 @@ import $ from 'jquery'
 import GlobeFlag from '../images/blue_globe_icon.png'
 import TrackerCard from './TrackerCard';
 import GraphCard from './GraphCard';
-import ContainerStyle from '../CardContainer.css'
+import ContainerStyle from './CardContainer.css'
 
 $(function () {
     console.log("jquery ready!")
