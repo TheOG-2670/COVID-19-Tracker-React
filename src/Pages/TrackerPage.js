@@ -12,7 +12,6 @@ export default class TrackerPage extends Component
           updateInterval:null
         }
       this.getCachedData=this.getCachedData.bind(this)
-      this.updateData=this.updateData.bind(this)
     }
 
   getCachedData()
@@ -34,25 +33,16 @@ export default class TrackerPage extends Component
   
   }
 
-
-  async updateData()
-  {
-    await fetch('/api/covid/updateData', {
-        method:'POST',
-        body:null
-    })
-  }
-
   componentDidMount()
   {
     console.log("page loaded!")
     this.getCachedData()
     
     var intervalID = setInterval(()=>{
-        this.updateData()
+        // this.updateData()
         this.getCachedData()
         console.log("page updated!")
-    },10000) //fetch data from api every hour starting at app launch
+    },3600000) //fetch data from api every hour starting at app launch
 
     this.setState({
       updateInterval: intervalID
