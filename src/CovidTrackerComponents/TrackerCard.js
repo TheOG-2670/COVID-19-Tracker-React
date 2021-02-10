@@ -4,19 +4,11 @@ import CaseIcon from '../images/case-icon.png'
 import DeathIcon from '../images/death-icon.png'
 import RecoveredIcon from '../images/recovered-icon.png'
 import $ from 'jquery';
+import NumberFormat from 'react-number-format';
 
-function numberFormatter(num) {
-    var absNum = Math.abs(num)
-    if (absNum > 999 && absNum <= 999999)
-        return Math.sign(num)*((absNum/1000).toFixed(1)) + 'k'
-    else if (absNum > 999999 && absNum <= 9999999)
-        return Math.sign(num)*((absNum/1000000).toFixed(1)) + 'M'
-    else if (absNum > 9999999 && absNum <=99999999)
-        return Math.sign(num)*((absNum/10000000).toFixed(1)) + 'B'
-    else if (absNum > 99999999 && absNum <=999999999)
-        return Math.sign(num)*((absNum/100000000).toFixed(2)) + 'B'
-    else
-        return Math.sign(num)*Math.abs(num)
+function numberFormat(num)
+{
+    return <NumberFormat value={num} displayType={'text'} thousandSeparator={true}/>
 }
 
 export default class TrackerCard extends Component {
@@ -33,7 +25,7 @@ export default class TrackerCard extends Component {
         console.log(this.props.regionData)
         if(this.props.regionData!==undefined)
         {
-            console.log(this.props.regionData.confirmed)
+            console.log(this.props.regionData.confirmed.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,'))
             this.setState({
                 confirmed: this.props.regionData.confirmed,
                 deaths: this.props.regionData.deaths,
@@ -47,7 +39,7 @@ export default class TrackerCard extends Component {
         if(prevProps.regionData!==this.props.regionData)
         {   
             this.setState({
-                confirmed:kFormatter(this.props.regionData.confirmed),
+                confirmed:this.props.regionData.confirmed,
                 deaths:this.props.regionData.deaths,
                 recovered:this.props.regionData.recovered
             })
@@ -74,7 +66,7 @@ export default class TrackerCard extends Component {
                             Confirmed Cases:
                         </h5>
                         <p className='card-text' style={covidCaseColorScheme.confirmedNo}>
-                            {numberFormatter(this.state.confirmed)}
+                            {numberFormat(this.state.confirmed)}
                         </p>
                     </div>
                 </li>
@@ -88,7 +80,7 @@ export default class TrackerCard extends Component {
                             Total Deaths:
                         </h5>
                         <p className='card-text' style={covidCaseColorScheme.deathsNo}>
-                            {numberFormatter(this.state.deaths)}
+                            {numberFormat(this.state.deaths)}
                         </p>
                     </div>
                 </li>
@@ -102,7 +94,7 @@ export default class TrackerCard extends Component {
                             Total Recoveries:
                         </h5>
                         <p className='card-text' style={covidCaseColorScheme.recoveredNo}>
-                            {numberFormatter(this.state.recovered)}
+                            {numberFormat(this.state.recovered)}
                         </p>
                     </div>
                 </li>
