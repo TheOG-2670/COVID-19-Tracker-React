@@ -3,7 +3,7 @@ import $ from 'jquery'
 import GlobeFlag from '../images/blue_globe_icon.png'
 import TrackerCard from './TrackerCard';
 import GraphCard from './GraphCard';
-import ContainerStyle from './CardContainer.css'
+import './CardContainer.css'
 
 $(function () {
     console.log("jquery ready!")
@@ -16,7 +16,6 @@ export default class CardContainer extends Component {
             currentCard:null
         }
 
-        this.setRegionFlag = this.setRegionFlag.bind(this)
         this.toGraph = this.toGraph.bind(this)
         this.toTracker = this.toTracker.bind(this)
         this.showButtons = this.showButtons.bind(this)
@@ -48,22 +47,6 @@ export default class CardContainer extends Component {
             })
         }
     }
-    
-
-    setRegionFlag = () => {
-        switch (this.props.regionData.name) {
-            case 'Global':
-                return GlobeFlag
-            case 'Canada':
-                return 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Flag_of_Canada_%28Pantone%29.svg/255px-Flag_of_Canada_%28Pantone%29.svg.png'
-            case 'USA':
-                return 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/220px-Flag_of_the_United_States.svg.png';
-            case 'Sri Lanka':
-                return "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Flag_of_Sri_Lanka.svg/255px-Flag_of_Sri_Lanka.svg.png";
-            case 'Israel':
-                return "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Flag_of_Israel.svg/234px-Flag_of_Israel.svg.png"
-        }
-    };
 
     toGraph()
     {
@@ -121,7 +104,7 @@ export default class CardContainer extends Component {
             <div style={{ marginTop: '30px' }}>
                 <div className='card'>
                     <h3 className='card-header'>
-                        <img src={this.setRegionFlag()} height="30"
+                        <img src={this.props.regionData.name!=="Global" ? this.props.regionData.flag : GlobeFlag} height="30"
                                 width={this.props.regionData.name === 'Global' ? "30" : "50"}
                                 style={{ marginRight: '10px' }} />
                         <i>{this.props.regionData.name}</i>
