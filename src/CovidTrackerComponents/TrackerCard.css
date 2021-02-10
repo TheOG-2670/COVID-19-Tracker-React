@@ -1,0 +1,14 @@
+.card-title
+{
+    font-size: 20px;
+}
+
+.card-text
+{
+    font-size: 40px;
+}
+
+#recovered-icon, #case-icon, #death-icon
+{
+    margin-right: 10px;
+}
