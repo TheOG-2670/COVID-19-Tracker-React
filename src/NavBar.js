@@ -1,15 +1,7 @@
 import React, {useEffect, useState } from 'react'
 import { NavLink } from "react-router-dom"
 
-//using React Hooks
 export default function NavBar() {
-    //replaces constructor
-    const [clock, setClock] = useState(new Date()) //clock -> state variable | setClock -> replaces setState
-
-    //replaces componentDidMount, componentDidUpdate, and componentWillUnmount
-    useEffect(() => {
-        setInterval(setClock(new Date()))
-    })
     
     const timePosition = {
         color: "white",
@@ -35,10 +27,6 @@ export default function NavBar() {
                             Self-Assessment
                             </h3>
                     </NavLink>
-                </li>
-
-                <li className="nav-item nav-link" style={timePosition}>
-                    {clock.toLocaleTimeString()}
                 </li>
             </ul>
         </nav>
