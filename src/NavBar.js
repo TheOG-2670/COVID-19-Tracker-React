@@ -8,11 +8,7 @@ export default function NavBar() {
 
     //replaces componentDidMount, componentDidUpdate, and componentWillUnmount
     useEffect(() => {
-        var clockTimerID = setInterval(()=>{
-            setClock(new Date())
-        },1000)
-
-        clearInterval(clockTimerID)
+        setInterval(setClock(new Date()))
     })
     
     const timePosition = {
