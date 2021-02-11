@@ -12,3 +12,18 @@
 {
     margin-right: 10px;
 }
+
+.confirmed
+{
+    color: #b3a700;
+}
+
+.deaths
+{
+    color: #b50202;
+}
+
+.recovered
+{
+    color: #00821c;
+}
