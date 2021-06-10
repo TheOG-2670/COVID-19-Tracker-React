@@ -1,6 +1,7 @@
 
 import React, {Component} from 'react';
 import CardContainer from '../CovidTrackerComponents/CardContainer';
+import SearchBar from './SearchBar';
 
 export default class TrackerPage extends Component
 {
@@ -12,6 +13,7 @@ export default class TrackerPage extends Component
           updateInterval:null
         }
       this.getCachedData=this.getCachedData.bind(this)
+      this.handleSubmit=this.handleSubmit.bind(this)
     }
 
   getCachedData()
@@ -39,7 +41,6 @@ export default class TrackerPage extends Component
     this.getCachedData()
     
     var intervalID = setInterval(()=>{
-        // this.updateData()
         this.getCachedData()
         console.log("page updated!")
     },3600000) //fetch data from api every hour starting at app launch
@@ -54,26 +55,28 @@ export default class TrackerPage extends Component
     clearInterval(this.state.updateInterval)
   }
 
+  handleSubmit(countryName) 
+  {
+    console.log(countryName)
+
+    fetch('/api/covid/countries/' + countryName)
+      .then(res => {
+        return res.json()
+      })
+      .then(data => {
+        console.log(data)
+      })
+  }
+
     render()
     {
         return(
-        <div>
-            <div className="col-md-6 offset-md-3">
-              {this.state.data[0]}
-            </div>
-            
-            <div className='row' style={{margin:'0'}}>
-              {
-                  this.state.data.filter(item=>item.props.regionData.name!=="Global")
-                  .map(item=>
-                    <div key={item.key} className="col-md-3">
-                      {item}
-                    </div>
-                )
-              } 
-            </div>
-           
-        </div>
+          <div>
+            <SearchBar onClick={this.handleSubmit}/>
+              <div className="col-md-6 offset-md-3">
+                {this.state.data[0]}
+              </div>
+          </div>
         )
     }
 }
