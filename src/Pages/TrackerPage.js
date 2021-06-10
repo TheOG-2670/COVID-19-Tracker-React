@@ -11,23 +11,13 @@ export default class TrackerPage extends Component
         this.state={
           global:null,
           country:null,
-          error:0,
-          updateInterval:null
+          error:false
         }
-      this.getCachedData=this.getCachedData.bind(this)
+      this.getGlobalCachedData=this.getGlobalCachedData.bind(this)
       this.handleSubmit=this.handleSubmit.bind(this)
-
-      //used to initialize cache for each country
-      // fetch('/api/covid/initData')
-      // .then(res=>{
-      //   return res.json()
-      // })
-      // .then(data=>{
-      //   console.log(data)
-      // })
     }
 
-  getCachedData()
+  getGlobalCachedData()
   {
     fetch('/api/covid/global')
     .then(res=>{return res.json()})
@@ -37,61 +27,46 @@ export default class TrackerPage extends Component
         global: <CardContainer regionData={data}/>
       })
     })
-  
   }
 
   componentDidMount()
   {
-    console.log("page loaded!")
-    this.getCachedData()
-    
-    // var intervalID = setInterval(()=>{
-    //     this.getCachedData()
-    //     console.log("page updated!")
-    // },3600000) //fetch data from api every hour starting at app launch
-
-    // this.setState({
-    //   updateInterval: intervalID
-    // })
+    this.getGlobalCachedData()
+    setInterval(()=>{
+        this.getGlobalCachedData()
+    },3600000) //fetch data from api every hour starting at app launch
   }
-
-  // componentWillUnmount()
-  // {
-  //   clearInterval(this.state.updateInterval)
-  // }
-
+  
   handleSubmit(countryName) 
   {
-    fetch('/api/covid/countries/' + countryName)
-      .then(res => {
-        if(res.status===404)
-        {
-          this.setState({
-            error: 1
-          })
-          return res.status
-        }
-        else
-        {
-          this.setState({
-            error: 0
-          })
-          return res.json()
-        }
+    fetch('/api/covid/countries/' + countryName + '/cached')
+    .then(res => {
+      if(res.status===404)
+      {
+        this.setState({
+          error: true
+        })
+        return res.status
+      }
+      else
+      {
+        this.setState({
+          error: false
+        })
+        return res.json()
+      }
+    })
+    .then(data => {
+      this.setState({
+        country: <CardContainer id={data.id} regionData={data}/>
       })
-      .then(data => {
-        // console.log(data)
-        
-          this.setState({
-            country: <CardContainer id={data.id} regionData={data}/>
-          })
-      })
+    })
   }
-
-    render()
-    {
-      const countryPlaceholderStyle={
-        marginTop:'250px', 
+  
+  render()
+  {
+    const countryPlaceholderStyle={
+      marginTop:'250px', 
         color:'grey', 
         border:'3px dashed grey', 
         borderRadius:'10px', 
@@ -113,7 +88,7 @@ export default class TrackerPage extends Component
 
                 <div className='col-md-5'>
                   {
-                    this.state.error===1 || this.state.country===null
+                    this.state.error || this.state.country===null
                     ?
                     <div className='' 
                         style={countryPlaceholderStyle}>
