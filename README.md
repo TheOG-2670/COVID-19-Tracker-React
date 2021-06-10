@@ -5,4 +5,4 @@ This React web app displays statistical data via a custom-built NodeJS API back-
 **Note**: This is still a work-in-progress with more features to be added in the near future
 
 
-Credits go to **Disease.sh** for developing the API endpoint: https://github.com/disease-sh/api
+Credits go to **Disease.sh** for developing the API: https://github.com/disease-sh/api
