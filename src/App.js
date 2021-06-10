@@ -1,6 +1,7 @@
 import React from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom'
 import NavBar from './NavBar'
+import SelfAssessmentPage from './Pages/SelfAssessmentPage';
 import TrackerPage from './Pages/TrackerPage';
 
 
@@ -26,7 +27,7 @@ export default function App(){
 
             <Route path="/covidTracker" component={TrackerPage}/>
 
-            <Route path="/self-assessment"/>
+            <Route path="/self-assessment" component={SelfAssessmentPage}/>
 
         </Switch>
       </div>
