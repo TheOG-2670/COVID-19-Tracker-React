@@ -3,12 +3,10 @@ import './TrackerCard.css'
 import CaseIcon from '../images/case-icon.png'
 import DeathIcon from '../images/death-icon.png'
 import RecoveredIcon from '../images/recovered-icon.png'
-import $ from 'jquery';
-import NumberFormat from 'react-number-format';
 
 function numberFormat(num)
 {
-    return <NumberFormat value={num} displayType={'text'} thousandSeparator={true}/>
+    return String(num).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 }
 
 export default class TrackerCard extends Component {
@@ -25,7 +23,6 @@ export default class TrackerCard extends Component {
         console.log(this.props.regionData)
         if(this.props.regionData!==undefined)
         {
-            console.log(this.props.regionData.confirmed.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,'))
             this.setState({
                 confirmed: this.props.regionData.confirmed,
                 deaths: this.props.regionData.deaths,
@@ -47,25 +44,18 @@ export default class TrackerCard extends Component {
     }
 
     render() {
-        const covidCaseColorScheme = {}
-        covidCaseColorScheme.confirmedTitle = { color: '#b3a700' }
-        covidCaseColorScheme.confirmedNo = { color: '#FFD700' }
-        covidCaseColorScheme.deathsTitle = { color: '#b50202' }
-        covidCaseColorScheme.deathsNo = { color: '#FA8072' }
-        covidCaseColorScheme.recoveredTitle = { color: '#00821c' }
-        covidCaseColorScheme.recoveredNo = { color: '#90EE90' }
 
         return (
             <ul className="list-group list-group-flush">
                 <li className="list-group-item">
                     <div id='confirmedCases' >
-                        <h5 className='card-title' style={covidCaseColorScheme.confirmedTitle}>
+                        <h5 className='card-title confirmed'>
                             <span id='case-icon'>
                                 <img src={CaseIcon} alt='covid case' width='25px'/>
                             </span>
                             Confirmed Cases:
                         </h5>
-                        <p className='card-text' style={covidCaseColorScheme.confirmedNo}>
+                        <p className='card-text confirmed'>
                             {numberFormat(this.state.confirmed)}
                         </p>
                     </div>
@@ -73,27 +63,27 @@ export default class TrackerCard extends Component {
 
                 <li className="list-group-item">
                     <div id='totalDeaths' >
-                        <h5 className='card-title' style={covidCaseColorScheme.deathsTitle}>
+                        <h5 className='card-title deaths'>
                             <span id='death-icon'>
                                 <img src={DeathIcon} alt='death icon' width='25px'/>
                             </span>
                             Total Deaths:
                         </h5>
-                        <p className='card-text' style={covidCaseColorScheme.deathsNo}>
+                        <p className='card-text deaths'>
                             {numberFormat(this.state.deaths)}
                         </p>
                     </div>
                 </li>
 
                 <li className="list-group-item">
-                    <div id='totalRecovered' style={covidCaseColorScheme.recoveredTitle}>
-                        <h5 className='card-title'>
+                    <div id='totalRecovered'>
+                        <h5 className='card-title recovered'>
                             <span id='recovered-icon'>
                                 <img src={RecoveredIcon} alt='recovered icon' width='20px'/>
                             </span>
                             Total Recoveries:
                         </h5>
-                        <p className='card-text' style={covidCaseColorScheme.recoveredNo}>
+                        <p className='card-text recovered'>
                             {numberFormat(this.state.recovered)}
                         </p>
                     </div>
