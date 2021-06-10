@@ -2,7 +2,7 @@
 
 This React web app displays statistical data via a custom-built NodeJS API back-end which accesses an external API that aggregates data from John Hopkins University for different countries and displays the number of active cases, recoveries and deaths from those countries. The app has been updated to display global and country-specific data.
 
-**Note**: This app is now complete under version 1.0
+**Note**: This app is now complete under version 1.0 with the basic functionality implemented, including ability to search by country
 
 
 Credits go to **Disease.sh** for developing the API: https://github.com/disease-sh/api
