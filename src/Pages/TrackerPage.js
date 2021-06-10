@@ -13,16 +13,15 @@ export default class TrackerPage extends Component
           country:null,
           error:false
         }
-      this.getGlobalCachedData=this.getGlobalCachedData.bind(this)
+      this.getGlobalData=this.getGlobalData.bind(this)
       this.handleSubmit=this.handleSubmit.bind(this)
     }
 
-  getGlobalCachedData()
+  getGlobalData() //includes updating the cache
   {
     fetch('/api/covid/global')
     .then(res=>{return res.json()})
     .then(data=>{
-      // console.log(data)
       this.setState({
         global: <CardContainer regionData={data}/>
       })
@@ -31,14 +30,20 @@ export default class TrackerPage extends Component
 
   componentDidMount()
   {
-    this.getGlobalCachedData()
+    this.getGlobalData()
     setInterval(()=>{
-        this.getGlobalCachedData()
+        this.getGlobalData()
     },3600000) //fetch data from api every hour starting at app launch
   }
   
-  handleSubmit(countryName) 
+  handleSubmit(countryName)
   {
+      fetch('/api/covid/countries/' + countryName + '/update')
+      .then(res=>{return res.json()})
+      .then((response)=>{
+        console.log(response)
+      })
+
     fetch('/api/covid/countries/' + countryName + '/cached')
     .then(res => {
       if(res.status===404)
@@ -104,6 +109,15 @@ export default class TrackerPage extends Component
                   }
                 </div>
               </div>
+
+              <br/>
+              <p>
+                <strong>API Credits:</strong> Disease.sh
+                <br/>
+                <a href='https://disease.sh'>Site</a>
+                <br/>
+                <a href='https://github.com/disease-sh/api'>GitHub</a>
+              </p>
           </div>
         )
     }
