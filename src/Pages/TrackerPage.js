@@ -11,6 +11,7 @@ export default class TrackerPage extends Component
         this.state={
           global:null,
           country:null,
+          error:0,
           updateInterval:null
         }
       this.getCachedData=this.getCachedData.bind(this)
@@ -61,18 +62,29 @@ export default class TrackerPage extends Component
 
   handleSubmit(countryName) 
   {
-    // console.log(countryName)
-
     fetch('/api/covid/countries/' + countryName)
       .then(res => {
-        return res.json()
+        if(res.status===404)
+        {
+          this.setState({
+            error: 1
+          })
+          return res.status
+        }
+        else
+        {
+          this.setState({
+            error: 0
+          })
+          return res.json()
+        }
       })
       .then(data => {
-        console.log(data)
-
-        this.setState({
-          country: <CardContainer id={data.id} regionData={data}/>
-        })
+        // console.log(data)
+        
+          this.setState({
+            country: <CardContainer id={data.id} regionData={data}/>
+          })
       })
   }
 
@@ -87,6 +99,7 @@ export default class TrackerPage extends Component
         textAlign:'center', 
         opacity:'0.5'
       }
+    
         return(
           <div className='container'>
             <SearchBar onClick={this.handleSubmit}/>
@@ -100,13 +113,19 @@ export default class TrackerPage extends Component
 
                 <div className='col-md-5'>
                   {
-                    this.state.country!==null
+                    this.state.error===1 || this.state.country===null
                     ?
-                    this.state.country
+                    <div className='' 
+                        style={countryPlaceholderStyle}>
+                    Searched country will appear here 
+                    <br/>
+                    <strong>
+                      <u>
+                        Note: Please maintain proper spelling
+                      </u>
+                    </strong></div>
                     :
-                    <div className='d-flex justify-content-center' 
-                        style={countryPlaceholderStyle}
-                    >Searched country will appear here</div>
+                    this.state.country
                   }
                 </div>
               </div>
